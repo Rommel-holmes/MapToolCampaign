@@ -1,0 +1,25 @@
+name: Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: [ ubuntu-latest ]
+    env:
+      working-directory: ./source
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v2
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: campaign.cmpgn
+          path: |
+            ${{ env.working-directory }}/assets/*
+            ${{ env.working-directory }}/content.xml
+            ${{ env.working-directory }}/properties.xml
