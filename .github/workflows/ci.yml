@@ -15,11 +15,17 @@ jobs:
       - name: Checkout repository code
         uses: actions/checkout@v2
 
+      - name: Install zip tool
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -qq zip
+
+      - name: Zip files
+        working-directory: ${{ env.working-directory }}
+        run: zip -r campaign.cmpgn .
+
       - name: Archive artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: campaign.cmpgn
-          path: |
-            ${{ env.working-directory }}/assets/*
-            ${{ env.working-directory }}/content.xml
-            ${{ env.working-directory }}/properties.xml
+          path:
+            ${{ env.working-directory }}/campaign.cmpgn
