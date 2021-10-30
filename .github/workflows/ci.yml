@@ -24,8 +24,5 @@ jobs:
         working-directory: ${{ env.working-directory }}
         run: zip -r campaign.cmpgn .
 
-      - name: Archive artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          path:
-            ${{ env.working-directory }}/campaign.cmpgn
+      - name: Try
+        run: echo ${{ github.event_name }}
